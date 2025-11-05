@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamens Path in Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel =  "stylesheet" type = "text/css" href = "Style/stylesheet.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid #334155;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: #60a5fa;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tag-hover {
+            transition: all 0.2s ease;
+        }
+        
+        .tag-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+        }
+    </style>
+</head>
+<body class="text-gray-300">
+    <!-- Navigation -->
+    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg glow">
+                        <i class="fas fa-laptop-code text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold"><span class="gradient-text">Lamens Path</span> <span class="text-gray-300">in Tech</span></h1>
+                </div>
+                <a href = "#">Home</a>
+            <a href = "#">About</a>
+            <a href = "#">Contact</a>
+            <button class="btnLogin-popup">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Blog Posts Section -->
+        <section id="postsSection" class="fade-in">
+            <h2 class="text-3xl font-bold text-center mb-2 gradient-text">Latest Tech Insights</h2>
+            <p class="text-gray-400 text-center mb-8">Simplifying complex tech concepts for everyone</p>
+            <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- New Post Form Section (Hidden by default) -->
+        <section id="newPostSection" class="hidden fade-in">
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 max-w-4xl mx-auto shadow-xl">
+                <h2 class="text-2xl font-bold text-white mb-2">Create New Post</h2>
+                <p class="text-gray-400 mb-6">Share your tech knowledge with the community</p>
+                <form id="postForm" class="space-y-5">
+                    <div>
+                        <label for="postTitle" class="block text-sm font-medium text-gray-300 mb-2">Title</label>
+                        <input type="text" id="postTitle" required 
+                               class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                               placeholder="Enter your post title">
+                    </div>
+                    
+                    <div>
+                        <label for="postContent" class="block text-sm font-medium text-gray-300 mb-2">Content</label>
+                        <textarea id="postContent" required rows="12"
+                                  class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 blog-content text-white placeholder-gray-500"
+                                  placeholder="Write your post content here... (Supports basic HTML)"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label for="postImage" class="block text-sm font-medium text-gray-300 mb-2">Image URL (Optional)</label>
+                        <input type="url" id="postImage" 
+                               class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                               placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="postTags" class="block text-sm font-medium text-gray-300 mb-2">Tags (comma separated)</label>
+                            <input type="text" id="postTags" 
+                                   class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                                   placeholder="javascript, webdev, beginners">
+                        </div>
+                        
+                        <div>
+                            <label for="postCategory" class="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                            <select id="postCategory" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white">
+                                <option value="webdev">Web Development</option>
+                                <option value="programming">Programming</option>
+                                <option value="tools">Tools & Software</option>
+                                <option value="career">Career Advice</option>
+                                <option value="concepts">Tech Concepts</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button type="submit" 
+                                class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition flex items-center glow">
+                            <i class="fas fa-paper-plane mr-2"></i> Publish Post
+                        </button>
+                        <button type="button" id="cancelPostBtn"
+                                class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg transition">
+                            Cancel
+                        </button>
+                        <button type="button" id="previewPostBtn"
+                                class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg transition flex items-center">
+                            <i class="fas fa-eye mr-2"></i> Preview
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-slate-800 rounded-xl border border-slate-700 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-white">Post Preview</h3>
+                        <button id="closePreview" class="text-gray-400 hover:text-white transition">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    <div id="previewContent" class="prose prose-invert max-w-none"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/80 border-t border-slate-800 py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition"><i class="fab fa-github text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-blue-300 transition"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-red-400 transition"><i class="fab fa-youtube text-xl"></i></a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 Lamens Path in Tech. Simplifying the tech journey for everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample initial blog posts
+        let blogPosts = [
+            {
+                id: 1,
+                title: "Getting Started with Web Development",
+                content: "<p>Web development might seem daunting at first, but it's one of the most accessible fields in tech. Start with HTML, then CSS, and finally JavaScript. Don't try to learn everything at once!</p><p>Remember: even senior developers use Google daily. The key is persistence and building projects consistently.</p><p>Here's a simple roadmap to get started:</p><ul><li>HTML & CSS basics</li><li>JavaScript fundamentals</li><li>Responsive design</li><li>Version control with Git</li><li>A frontend framework (React, Vue, etc.)</li></ul>",
+                image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                tags: ["beginners", "webdev", "html", "css"],
+                category: "webdev",
+                date: "2024-01-15",
+                author: "Admin"
+            },
+            {
+                id: 2,
+                title: "Understanding APIs in Simple Terms",
+                content: "<p>Think of an API like a waiter in a restaurant. You (the client) tell the waiter what you want, the waiter takes your request to the kitchen (the server), and brings back your food (the data).</p><p>APIs let different software applications talk to each other seamlessly. They're the backbone of modern web applications.</p><p>Common types of APIs:</p><ul><li>REST APIs - Most common, uses HTTP requests</li><li>GraphQL - More flexible querying</li><li>SOAP - Older, more structured protocol</li></ul>",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                tags: ["api", "beginners", "concepts"],
+                category: "concepts",
+                date: "2024-01-10",
+                author: "Admin"
+            },
+            {
+                id: 3,
+                title: "Git & GitHub: A Beginner's Guide",
+                content: "<p>Version control is essential for any developer. Git helps you track changes in your code, while GitHub provides a platform to host your repositories.</p><p>Basic Git commands every developer should know:</p><ul><li><code>git init</code> - Initialize a new repository</li><li><code>git add</code> - Stage changes for commit</li><li><code>git commit</code> - Save your changes with a message</li><li><code>git push</code> - Upload your changes to a remote repository</li><li><code>git pull</code> - Download changes from a remote repository</li></ul>",
+                image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                tags: ["git", "github", "tools", "beginners"],
+                category: "tools",
+                date: "2024-01-05",
+                author: "Admin"
+            }
+        ];
+
+        // DOM Elements
+        const postsSection = document.getElementById('postsSection');
+        const newPostSection = document.getElementById('newPostSection');
+        const postsContainer = document.getElementById('postsContainer');
+        const postForm = document.getElementById('postForm');
+        const viewPostsBtn = document.getElementById('viewPostsBtn');
+        const newPostBtn = document.getElementById('newPostBtn');
+        const cancelPostBtn = document.getElementById('cancelPostBtn');
+        const previewPostBtn = document.getElementById('previewPostBtn');
+        const previewModal = document.getElementById('previewModal');
+        const closePreview = document.getElementById('closePreview');
+        const previewContent = document.getElementById('previewContent');
+
+        // Initialize the blog
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPosts();
+        });
+
+        // Display all blog posts
+        function displayPosts() {
+            postsContainer.innerHTML = '';
+            
+            if (blogPosts.length === 0) {
+                postsContainer.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-inbox text-5xl text-slate-700 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-slate-500">No posts yet</h3>
+                        <p class="text-slate-600 mt-2">Be the first to share your tech journey!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            blogPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'bg-slate-800 rounded-xl overflow-hidden card-hover fade-in';
+                postElement.innerHTML = `
+                    ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover">` : 
+                      `<div class="w-full h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                         <i class="fas fa-laptop-code text-4xl text-slate-600"></i>
+                       </div>`}
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-white">${post.title}</h3>
+                            <span class="text-xs text-slate-400 bg-slate-700 px-2 py-1 rounded">${formatDate(post.date)}</span>
+                        </div>
+                        <div class="text-slate-400 mb-4 line-clamp-3">${stripHtml(post.content).substring(0, 150)}...</div>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            ${post.tags.map(tag => `<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded tag-hover">${tag}</span>`).join('')}
+                        </div>
+                        <button onclick="viewPost(${post.id})" class="text-blue-400 hover:text-blue-300 font-medium flex items-center transition">
+                            Read more <i class="fas fa-arrow-right ml-1 text-sm"></i>
+                        </button>
+                    </div>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // View a single post in detail
+        function viewPost(postId) {
+            const post = blogPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in';
+            modal.innerHTML = `
+                <div class="bg-slate-800 rounded-xl border border-slate-700 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h2 class="text-3xl font-bold text-white">${post.title}</h2>
+                            <button onclick="this.closest('.fixed').remove()" class="text-slate-400 hover:text-white transition">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center text-slate-400 mb-6">
+                            <span class="mr-4"><i class="far fa-calendar mr-1"></i> ${formatDate(post.date)}</span>
+                            <span class="mr-4"><i class="far fa-user mr-1"></i> ${post.author}</span>
+                            <span class="bg-slate-700 text-slate-300 px-2 py-1 rounded text-xs">${post.category}</span>
+                        </div>
+                        ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-64 object-cover rounded-lg mb-6">` : ''}
+                        <div class="prose prose-invert max-w-none blog-content">${post.content}</div>
+                        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-700">
+                            ${post.tags.map(tag => `<span class="text-sm bg-slate-700 text-slate-300 px-3 py-1 rounded-full">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Toggle between posts view and new post form
+        viewPostsBtn.addEventListener('click', () => {
+            newPostSection.classList.add('hidden');
+            postsSection.classList.remove('hidden');
+            displayPosts();
+        });
+
+        newPostBtn.addEventListener('click', () => {
+            postsSection.classList.add('hidden');
+            newPostSection.classList.remove('hidden');
+            postForm.reset();
+        });
+
+        cancelPostBtn.addEventListener('click', () => {
+            newPostSection.classList.add('hidden');
+            postsSection.classList.remove('hidden');
+        });
+
+        // Handle form submission
+        postForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const content = document.getElementById('postContent').value;
+            const image = document.getElementById('postImage').value;
+            const tags = document.getElementById('postTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+            const category = document.getElementById('postCategory').value;
+            
+            const newPost = {
+                id: blogPosts.length > 0 ? Math.max(...blogPosts.map(p => p.id)) + 1 : 1,
+                title,
+                content,
+                image: image || null,
+                tags,
+                category,
+                date: new Date().toISOString().split('T')[0],
+                author: "Admin"
+            };
+            
+            blogPosts.unshift(newPost);
+            displayPosts();
+            
+            // Show success message
+            showNotification('Post published successfully!', 'success');
+            
+            // Switch back to posts view
+            newPostSection.classList.add('hidden');
+            postsSection.classList.remove('hidden');
+        });
+
+        // Preview functionality
+        previewPostBtn.addEventListener('click', function() {
+            const title = document.getElementById('postTitle').value || 'Post Title';
+            const content = document.getElementById('postContent').value || 'Post content will appear here...';
+            const image = document.getElementById('postImage').value;
+            const tags = document.getElementById('postTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+            
+            let previewHtml = `
+                <h1 class="text-3xl font-bold mb-4 text-white">${title}</h1>
+                ${image ? `<img src="${image}" alt="${title}" class="w-full h-64 object-cover rounded-lg mb-6">` : ''}
+                <div class="prose prose-invert max-w-none">${content}</div>
+            `;
+            
+            if (tags.length > 0) {
+                previewHtml += `
+                    <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-700">
+                        ${tags.map(tag => `<span class="text-sm bg-slate-700 text-slate-300 px-3 py-1 rounded-full">${tag}</span>`).join('')}
+                    </div>
+                `;
+            }
+            
+            previewContent.innerHTML = previewHtml;
+            previewModal.classList.remove('hidden');
+        });
+
+        closePreview.addEventListener('click', function() {
+            previewModal.classList.add('hidden');
+        });
+
+        // Utility functions
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+        
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 fade-in ${
+                type === 'success' ? 'bg-green-900 text-green-200 border border-green-700' : 
+                'bg-red-900 text-red-200 border border-red-700'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Make functions available globally for onclick handlers
+        window.viewPost = viewPost;
+    </script>
+</body>
+</html>
