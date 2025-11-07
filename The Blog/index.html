@@ -6,14 +6,22 @@
     <title>Lamens Path in Tech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel =  "stylesheet" type = "text/css" href = "Style/stylesheet.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             min-height: 100vh;
+            color: #334155;
         }
         
         .fade-in {
@@ -33,7 +41,7 @@
         }
         
         .gradient-text {
-            background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 100%);
+            background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -41,13 +49,13 @@
         
         .card-hover {
             transition: all 0.3s ease;
-            border: 1px solid #334155;
+            border: 1px solid #cbd5e1;
         }
         
         .card-hover:hover {
             transform: translateY(-5px);
-            border-color: #60a5fa;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            border-color: #0d9488;
+            box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.2);
         }
         
         .tag-hover {
@@ -59,78 +67,354 @@
         }
         
         .glow {
-            box-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
+            box-shadow: 0 0 15px rgba(13, 148, 136, 0.2);
+        }
+        
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100%;
+            background: rgba(240, 249, 255, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: -1px 0 10px rgba(0, 0, 0, .1);
+            border-left: 2px solid rgba(13, 148, 136, 0.1);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            transition: right 0.5s ease;
+        }
+        
+        .login-modal.active {
+            right: 0;
+        }
+        
+        .login-modal .logreg-box {
+            width: 100%;
+        }
+        
+        .logreg-box .logreg-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #0f766e;
+        }
+        
+        .logreg-box .input-box {
+            position: relative; 
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+            border-bottom: 2px solid rgba(13, 148, 136, 0.3);
+        }
+        
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #0f766e;
+            font-weight: 500;
+            padding-right: 25px;
+        }
+        
+        .input-box label {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #0f766e;
+            font-weight: 500;
+            pointer-events: none;
+            transition: .5s;
+        }
+        
+        .input-box input:focus~label, 
+        .input-box input:valid~label {
+            top: -5px;
+        }
+        
+        .input-box .icon {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            font-size: 19px;
+            color: #0f766e;
+        }
+        
+        .logreg-box .remember-forgot {
+            font-size: 14.5px;
+            color: #0f766e;
+            font-weight: 500;
+            margin: -15px 0 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .remember-forgot label input {
+            accent-color: #0d9488;
+            margin-right: 3px;
+        }
+        
+        .remember-forgot a {
+            color: #0f766e;
+            text-decoration: none;
+        }
+        
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+        
+        .logreg-box .btn {
+            width: 100%;
+            height: 45px;
+            background: #0d9488;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .logreg-box .btn:hover {
+            background: #0f766e;
+        }
+        
+        .media-options {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        
+        .media-options a {
+            width: 100%;
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #0d9488;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+            border-radius: 40px;
+            color: #0f766e;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .media-options a:hover {
+            background: rgba(13, 148, 136, 0.1);
+        }
+        
+        .close-login {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #0f766e;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 99;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .admin-badge {
+            background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+        
+        .category-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(90deg, #0d9488 0%, #14b8a6 100%);
+            color: white;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .category-webdev {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .category-programming {
+            background-color: #f3e8ff;
+            color: #7c3aed;
+        }
+        
+        .category-tools {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        
+        .category-career {
+            background-color: #dcfce7;
+            color: #15803d;
+        }
+        
+        .category-concepts {
+            background-color: #ffe4e6;
+            color: #be123c;
         }
     </style>
 </head>
-<body class="text-gray-300">
+<body class="text-slate-700">
     <!-- Navigation -->
-    <nav class="bg-slate-900/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
-                    <div class="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg glow">
+                    <div class="bg-gradient-to-br from-teal-500 to-cyan-500 p-2 rounded-lg glow">
                         <i class="fas fa-laptop-code text-white text-xl"></i>
                     </div>
-                    <h1 class="text-2xl font-bold"><span class="gradient-text">Lamens Path</span> <span class="text-gray-300">in Tech</span></h1>
+                    <h1 class="text-2xl font-bold"><span class="gradient-text">Lamens Path</span> <span class="text-slate-700">in Tech</span></h1>
                 </div>
-                <a href = "#">Home</a>
-            <a href = "#">About</a>
-            <a href = "#">Contact</a>
-            <button class="btnLogin-popup">Login</button>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="text-slate-700 hover:text-teal-600 transition">Home</a>
+                    <a href="#" class="text-slate-700 hover:text-teal-600 transition">About</a>
+                    <a href="#" class="text-slate-700 hover:text-teal-600 transition">Contact</a>
+                    <div id="userInfo" class="hidden items-center">
+                        <span id="userName" class="text-slate-700 mr-2"></span>
+                        <span id="userRole" class="admin-badge"></span>
+                        <button id="logoutBtn" class="ml-4 text-slate-700 hover:text-teal-600 transition">
+                            Logout
+                        </button>
+                    </div>
+                    <button id="loginBtn" class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-4 py-2 rounded-lg transition glow">
+                        Login
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Category Tabs -->
+        <section id="categoryTabs" class="mb-8 fade-in">
+            <h2 class="text-2xl font-bold text-center mb-6 gradient-text">Browse by Category</h2>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="category-tab active px-4 py-2 rounded-lg border border-teal-500 text-teal-600 bg-teal-50" data-category="all">
+                    All Posts
+                </button>
+                <button class="category-tab px-4 py-2 rounded-lg border border-slate-300 hover:border-teal-300 text-slate-700 hover:text-teal-600" data-category="webdev">
+                    Web Development
+                </button>
+                <button class="category-tab px-4 py-2 rounded-lg border border-slate-300 hover:border-teal-300 text-slate-700 hover:text-teal-600" data-category="programming">
+                    Programming
+                </button>
+                <button class="category-tab px-4 py-2 rounded-lg border border-slate-300 hover:border-teal-300 text-slate-700 hover:text-teal-600" data-category="tools">
+                    Tools & Software
+                </button>
+                <button class="category-tab px-4 py-2 rounded-lg border border-slate-300 hover:border-teal-300 text-slate-700 hover:text-teal-600" data-category="career">
+                    Career Advice
+                </button>
+                <button class="category-tab px-4 py-2 rounded-lg border border-slate-300 hover:border-teal-300 text-slate-700 hover:text-teal-600" data-category="concepts">
+                    Tech Concepts
+                </button>
+            </div>
+        </section>
+
         <!-- Blog Posts Section -->
         <section id="postsSection" class="fade-in">
             <h2 class="text-3xl font-bold text-center mb-2 gradient-text">Latest Tech Insights</h2>
-            <p class="text-gray-400 text-center mb-8">Simplifying complex tech concepts for everyone</p>
+            <p class="text-slate-600 text-center mb-8">Simplifying complex tech concepts for everyone</p>
+            
+            <!-- Category-specific headings -->
+            <div id="categoryHeading" class="mb-6">
+                <h3 id="activeCategory" class="text-xl font-semibold text-slate-800">All Posts</h3>
+                <p id="postCount" class="text-slate-600"></p>
+            </div>
+            
             <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Posts will be dynamically inserted here -->
+            </div>
+            
+            <!-- New Post Button (Visible only to admin) -->
+            <div id="newPostContainer" class="text-center mt-12 hidden">
+                <button id="newPostBtn" class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-lg transition flex items-center mx-auto glow">
+                    <i class="fas fa-plus mr-2"></i> Create New Post
+                </button>
             </div>
         </section>
 
         <!-- New Post Form Section (Hidden by default) -->
         <section id="newPostSection" class="hidden fade-in">
-            <div class="bg-slate-800 rounded-xl border border-slate-700 p-6 max-w-4xl mx-auto shadow-xl">
-                <h2 class="text-2xl font-bold text-white mb-2">Create New Post</h2>
-                <p class="text-gray-400 mb-6">Share your tech knowledge with the community</p>
+            <div class="bg-white rounded-xl border border-slate-200 p-6 max-w-4xl mx-auto shadow-xl">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Create New Post</h2>
+                <p class="text-slate-600 mb-6">Share your tech knowledge with the community</p>
                 <form id="postForm" class="space-y-5">
                     <div>
-                        <label for="postTitle" class="block text-sm font-medium text-gray-300 mb-2">Title</label>
+                        <label for="postTitle" class="block text-sm font-medium text-slate-700 mb-2">Title</label>
                         <input type="text" id="postTitle" required 
-                               class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                               class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-800 placeholder-slate-500"
                                placeholder="Enter your post title">
                     </div>
                     
                     <div>
-                        <label for="postContent" class="block text-sm font-medium text-gray-300 mb-2">Content</label>
+                        <label for="postContent" class="block text-sm font-medium text-slate-700 mb-2">Content</label>
                         <textarea id="postContent" required rows="12"
-                                  class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 blog-content text-white placeholder-gray-500"
+                                  class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 blog-content text-slate-800 placeholder-slate-500"
                                   placeholder="Write your post content here... (Supports basic HTML)"></textarea>
                     </div>
                     
                     <div>
-                        <label for="postImage" class="block text-sm font-medium text-gray-300 mb-2">Image URL (Optional)</label>
+                        <label for="postImage" class="block text-sm font-medium text-slate-700 mb-2">Image URL (Optional)</label>
                         <input type="url" id="postImage" 
-                               class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                               class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-800 placeholder-slate-500"
                                placeholder="https://example.com/image.jpg">
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label for="postTags" class="block text-sm font-medium text-gray-300 mb-2">Tags (comma separated)</label>
+                            <label for="postTags" class="block text-sm font-medium text-slate-700 mb-2">Tags (comma separated)</label>
                             <input type="text" id="postTags" 
-                                   class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white placeholder-gray-500"
+                                   class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-800 placeholder-slate-500"
                                    placeholder="javascript, webdev, beginners">
                         </div>
                         
                         <div>
-                            <label for="postCategory" class="block text-sm font-medium text-gray-300 mb-2">Category</label>
-                            <select id="postCategory" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white">
+                            <label for="postCategory" class="block text-sm font-medium text-slate-700 mb-2">Category</label>
+                            <select id="postCategory" class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 text-slate-800">
                                 <option value="webdev">Web Development</option>
                                 <option value="programming">Programming</option>
                                 <option value="tools">Tools & Software</option>
@@ -142,15 +426,15 @@
                     
                     <div class="flex flex-wrap gap-4 pt-4">
                         <button type="submit" 
-                                class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition flex items-center glow">
+                                class="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-lg transition flex items-center glow">
                             <i class="fas fa-paper-plane mr-2"></i> Publish Post
                         </button>
                         <button type="button" id="cancelPostBtn"
-                                class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg transition">
+                                class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-3 rounded-lg transition">
                             Cancel
                         </button>
                         <button type="button" id="previewPostBtn"
-                                class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-lg transition flex items-center">
+                                class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-3 rounded-lg transition flex items-center">
                             <i class="fas fa-eye mr-2"></i> Preview
                         </button>
                     </div>
@@ -159,31 +443,77 @@
         </section>
 
         <!-- Preview Modal -->
-        <div id="previewModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-            <div class="bg-slate-800 rounded-xl border border-slate-700 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div id="previewModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl border border-slate-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-2xl font-bold text-white">Post Preview</h3>
-                        <button id="closePreview" class="text-gray-400 hover:text-white transition">
+                        <h3 class="text-2xl font-bold text-slate-800">Post Preview</h3>
+                        <button id="closePreview" class="text-slate-500 hover:text-slate-700 transition">
                             <i class="fas fa-times text-2xl"></i>
                         </button>
                     </div>
-                    <div id="previewContent" class="prose prose-invert max-w-none"></div>
+                    <div id="previewContent" class="prose max-w-none"></div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Login Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="login-modal" id="loginModal">
+        <span class="close-login" id="closeLogin">
+            <i class="fas fa-times"></i>
+        </span>
+        <div class="logreg-box">
+            <div class="form-box login">
+                <div class="logreg-title">
+                    <h2>Admin Login</h2>
+                    <p class="text-slate-600 mt-2">Welcome back to Lamens Path in Tech</p>
+                </div>
+                <form id="loginForm">
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-envelope'></i> </span>
+                        <input type="email" id="loginEmail" required>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bx-lock'></i> </span>
+                        <input type="password" id="loginPassword" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="remember-forgot">
+                        <label>
+                            <input type="checkbox">Remember me
+                        </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn">Login</button>
+                </form>
+            </div>
+        </div>
+        <div class="media-options">
+            <a href="#">
+                <i class='bx bxl-google'></i>
+                <span>Login with Google</span>
+            </a>
+            <a href="#">
+                <i class='bx bxl-facebook-circle'></i>
+                <span>Login with Facebook</span>
+            </a>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="bg-slate-900/80 border-t border-slate-800 py-8 mt-12">
+    <footer class="bg-white/80 border-t border-slate-200 py-8 mt-12">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <div class="flex justify-center space-x-6 mb-4">
-                <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-purple-400 transition"><i class="fab fa-github text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-blue-300 transition"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="#" class="text-gray-400 hover:text-red-400 transition"><i class="fab fa-youtube text-xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-teal-500 transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-teal-500 transition"><i class="fab fa-github text-xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-teal-500 transition"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="#" class="text-slate-600 hover:text-teal-500 transition"><i class="fab fa-youtube text-xl"></i></a>
             </div>
-            <p class="text-gray-400">&copy; 2024 Lamens Path in Tech. Simplifying the tech journey for everyone.</p>
+            <p class="text-slate-600">&copy; 2024 Lamens Path in Tech. Simplifying the tech journey for everyone.</p>
         </div>
     </footer>
 
@@ -219,60 +549,224 @@
                 category: "tools",
                 date: "2024-01-05",
                 author: "Admin"
+            },
+            {
+                id: 4,
+                title: "Python for Beginners: Your First Steps",
+                content: "<p>Python is one of the most beginner-friendly programming languages. Its clean syntax and readability make it a great choice for those new to coding.</p><p>Here are some key concepts to start with:</p><ul><li>Variables and data types</li><li>Conditional statements (if/else)</li><li>Loops (for and while)</li><li>Functions</li><li>Basic data structures (lists, dictionaries)</li></ul>",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                tags: ["python", "programming", "beginners"],
+                category: "programming",
+                date: "2024-01-03",
+                author: "Admin"
+            },
+            {
+                id: 5,
+                title: "How to Land Your First Tech Job",
+                content: "<p>Breaking into the tech industry can seem challenging, but with the right approach, you can land your first job. Here are some tips:</p><ul><li>Build a strong portfolio with real projects</li><li>Contribute to open source</li><li>Network with other developers</li><li>Prepare for technical interviews</li><li>Don't underestimate soft skills</li></ul>",
+                image: "https://images.unsplash.com/photo-1551836026-d5c2c0c66c1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                tags: ["career", "jobs", "beginners"],
+                category: "career",
+                date: "2023-12-28",
+                author: "Admin"
             }
         ];
+
+        // Category display names
+        const categoryNames = {
+            'webdev': 'Web Development',
+            'programming': 'Programming',
+            'tools': 'Tools & Software',
+            'career': 'Career Advice',
+            'concepts': 'Tech Concepts'
+        };
+
+        // User management
+        let currentUser = null;
+        const adminCredentials = {
+            email: "admin@lamenspath.com",
+            password: "admin123"
+        };
 
         // DOM Elements
         const postsSection = document.getElementById('postsSection');
         const newPostSection = document.getElementById('newPostSection');
         const postsContainer = document.getElementById('postsContainer');
+        const newPostContainer = document.getElementById('newPostContainer');
         const postForm = document.getElementById('postForm');
-        const viewPostsBtn = document.getElementById('viewPostsBtn');
         const newPostBtn = document.getElementById('newPostBtn');
         const cancelPostBtn = document.getElementById('cancelPostBtn');
         const previewPostBtn = document.getElementById('previewPostBtn');
         const previewModal = document.getElementById('previewModal');
         const closePreview = document.getElementById('closePreview');
         const previewContent = document.getElementById('previewContent');
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const activeCategory = document.getElementById('activeCategory');
+        const postCount = document.getElementById('postCount');
+        
+        // Login elements
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const overlay = document.getElementById('overlay');
+        const loginForm = document.getElementById('loginForm');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const userRole = document.getElementById('userRole');
+        const logoutBtn = document.getElementById('logoutBtn');
 
         // Initialize the blog
         document.addEventListener('DOMContentLoaded', function() {
-            displayPosts();
+            displayPosts('all');
+            checkLoginStatus();
+            
+            // Category tab functionality
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active tab
+                    categoryTabs.forEach(t => t.classList.remove('active', 'bg-teal-50', 'border-teal-500', 'text-teal-600'));
+                    categoryTabs.forEach(t => t.classList.add('border-slate-300', 'text-slate-700'));
+                    
+                    this.classList.add('active', 'bg-teal-50', 'border-teal-500', 'text-teal-600');
+                    this.classList.remove('border-slate-300', 'text-slate-700');
+                    
+                    // Display posts for selected category
+                    displayPosts(category);
+                });
+            });
+            
+            // Login functionality
+            loginBtn.addEventListener('click', function() {
+                loginModal.classList.add('active');
+                overlay.classList.add('active');
+            });
+            
+            closeLogin.addEventListener('click', function() {
+                loginModal.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            overlay.addEventListener('click', function() {
+                loginModal.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            // Login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (email === adminCredentials.email && password === adminCredentials.password) {
+                    currentUser = {
+                        name: "Admin",
+                        email: email,
+                        role: "admin"
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Update UI
+                    updateUIForAdmin();
+                    
+                    // Close modal
+                    loginModal.classList.remove('active');
+                    overlay.classList.remove('active');
+                    
+                    // Show success message
+                    showNotification('Successfully logged in as Admin!', 'success');
+                } else {
+                    showNotification('Invalid credentials. Please try again.', 'error');
+                }
+            });
+
+            // Logout functionality
+            logoutBtn.addEventListener('click', function() {
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                updateUIForGuest();
+                showNotification('Successfully logged out.', 'success');
+            });
         });
 
-        // Display all blog posts
-        function displayPosts() {
+        // Check if user is logged in
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUIForAdmin();
+            } else {
+                updateUIForGuest();
+            }
+        }
+
+        // Update UI for admin
+        function updateUIForAdmin() {
+            loginBtn.classList.add('hidden');
+            userInfo.classList.remove('hidden');
+            userName.textContent = currentUser.name;
+            userRole.textContent = currentUser.role;
+            newPostContainer.classList.remove('hidden');
+        }
+
+        // Update UI for guest
+        function updateUIForGuest() {
+            loginBtn.classList.remove('hidden');
+            userInfo.classList.add('hidden');
+            newPostContainer.classList.add('hidden');
+        }
+
+        // Display posts by category
+        function displayPosts(category = 'all') {
             postsContainer.innerHTML = '';
             
-            if (blogPosts.length === 0) {
+            // Filter posts by category
+            let filteredPosts = blogPosts;
+            if (category !== 'all') {
+                filteredPosts = blogPosts.filter(post => post.category === category);
+            }
+            
+            // Update category heading and count
+            if (category === 'all') {
+                activeCategory.textContent = 'All Posts';
+            } else {
+                activeCategory.textContent = categoryNames[category] || category;
+            }
+            postCount.textContent = `${filteredPosts.length} ${filteredPosts.length === 1 ? 'post' : 'posts'}`;
+            
+            if (filteredPosts.length === 0) {
                 postsContainer.innerHTML = `
                     <div class="col-span-full text-center py-12">
-                        <i class="fas fa-inbox text-5xl text-slate-700 mb-4"></i>
+                        <i class="fas fa-inbox text-5xl text-slate-400 mb-4"></i>
                         <h3 class="text-xl font-semibold text-slate-500">No posts yet</h3>
-                        <p class="text-slate-600 mt-2">Be the first to share your tech journey!</p>
+                        <p class="text-slate-600 mt-2">${category === 'all' ? 'Be the first to share your tech journey!' : `No posts in ${categoryNames[category] || category} category yet`}</p>
                     </div>
                 `;
                 return;
             }
             
-            blogPosts.forEach(post => {
+            filteredPosts.forEach(post => {
                 const postElement = document.createElement('div');
-                postElement.className = 'bg-slate-800 rounded-xl overflow-hidden card-hover fade-in';
+                postElement.className = 'bg-white rounded-xl overflow-hidden card-hover fade-in';
                 postElement.innerHTML = `
                     ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover">` : 
-                      `<div class="w-full h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
-                         <i class="fas fa-laptop-code text-4xl text-slate-600"></i>
+                      `<div class="w-full h-48 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                         <i class="fas fa-laptop-code text-4xl text-slate-400"></i>
                        </div>`}
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-white">${post.title}</h3>
-                            <span class="text-xs text-slate-400 bg-slate-700 px-2 py-1 rounded">${formatDate(post.date)}</span>
+                            <h3 class="text-xl font-bold text-slate-800">${post.title}</h3>
+                            <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">${formatDate(post.date)}</span>
                         </div>
-                        <div class="text-slate-400 mb-4 line-clamp-3">${stripHtml(post.content).substring(0, 150)}...</div>
+                        <div class="category-badge category-${post.category}">${categoryNames[post.category] || post.category}</div>
+                        <div class="text-slate-600 mb-4 line-clamp-3">${stripHtml(post.content).substring(0, 150)}...</div>
                         <div class="flex flex-wrap gap-1 mb-4">
-                            ${post.tags.map(tag => `<span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded tag-hover">${tag}</span>`).join('')}
+                            ${post.tags.map(tag => `<span class="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded tag-hover">${tag}</span>`).join('')}
                         </div>
-                        <button onclick="viewPost(${post.id})" class="text-blue-400 hover:text-blue-300 font-medium flex items-center transition">
+                        <button onclick="viewPost(${post.id})" class="text-teal-600 hover:text-teal-700 font-medium flex items-center transition">
                             Read more <i class="fas fa-arrow-right ml-1 text-sm"></i>
                         </button>
                     </div>
@@ -287,25 +781,25 @@
             if (!post) return;
             
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in';
+            modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 fade-in';
             modal.innerHTML = `
-                <div class="bg-slate-800 rounded-xl border border-slate-700 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div class="bg-white rounded-xl border border-slate-200 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
-                            <h2 class="text-3xl font-bold text-white">${post.title}</h2>
-                            <button onclick="this.closest('.fixed').remove()" class="text-slate-400 hover:text-white transition">
+                            <h2 class="text-3xl font-bold text-slate-800">${post.title}</h2>
+                            <button onclick="this.closest('.fixed').remove()" class="text-slate-500 hover:text-slate-700 transition">
                                 <i class="fas fa-times text-2xl"></i>
                             </button>
                         </div>
-                        <div class="flex items-center text-slate-400 mb-6">
+                        <div class="flex items-center text-slate-600 mb-6">
                             <span class="mr-4"><i class="far fa-calendar mr-1"></i> ${formatDate(post.date)}</span>
                             <span class="mr-4"><i class="far fa-user mr-1"></i> ${post.author}</span>
-                            <span class="bg-slate-700 text-slate-300 px-2 py-1 rounded text-xs">${post.category}</span>
+                            <span class="category-badge category-${post.category}">${categoryNames[post.category] || post.category}</span>
                         </div>
                         ${post.image ? `<img src="${post.image}" alt="${post.title}" class="w-full h-64 object-cover rounded-lg mb-6">` : ''}
-                        <div class="prose prose-invert max-w-none blog-content">${post.content}</div>
-                        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-700">
-                            ${post.tags.map(tag => `<span class="text-sm bg-slate-700 text-slate-300 px-3 py-1 rounded-full">${tag}</span>`).join('')}
+                        <div class="prose max-w-none blog-content">${post.content}</div>
+                        <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-200">
+                            ${post.tags.map(tag => `<span class="text-sm bg-teal-100 text-teal-700 px-3 py-1 rounded-full">${tag}</span>`).join('')}
                         </div>
                     </div>
                 </div>
@@ -314,13 +808,12 @@
         }
 
         // Toggle between posts view and new post form
-        viewPostsBtn.addEventListener('click', () => {
-            newPostSection.classList.add('hidden');
-            postsSection.classList.remove('hidden');
-            displayPosts();
-        });
-
         newPostBtn.addEventListener('click', () => {
+            if (!currentUser || currentUser.role !== 'admin') {
+                showNotification('You need to be logged in as admin to create posts.', 'error');
+                return;
+            }
+            
             postsSection.classList.add('hidden');
             newPostSection.classList.remove('hidden');
             postForm.reset();
@@ -334,6 +827,12 @@
         // Handle form submission
         postForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Check if user is admin
+            if (!currentUser || currentUser.role !== 'admin') {
+                showNotification('You need to be logged in as admin to create posts.', 'error');
+                return;
+            }
             
             const title = document.getElementById('postTitle').value;
             const content = document.getElementById('postContent').value;
@@ -353,7 +852,7 @@
             };
             
             blogPosts.unshift(newPost);
-            displayPosts();
+            displayPosts('all'); // Show all posts after creating a new one
             
             // Show success message
             showNotification('Post published successfully!', 'success');
@@ -369,17 +868,19 @@
             const content = document.getElementById('postContent').value || 'Post content will appear here...';
             const image = document.getElementById('postImage').value;
             const tags = document.getElementById('postTags').value.split(',').map(tag => tag.trim()).filter(tag => tag);
+            const category = document.getElementById('postCategory').value;
             
             let previewHtml = `
-                <h1 class="text-3xl font-bold mb-4 text-white">${title}</h1>
+                <h1 class="text-3xl font-bold mb-4 text-slate-800">${title}</h1>
+                <div class="category-badge category-${category} mb-4">${categoryNames[category] || category}</div>
                 ${image ? `<img src="${image}" alt="${title}" class="w-full h-64 object-cover rounded-lg mb-6">` : ''}
-                <div class="prose prose-invert max-w-none">${content}</div>
+                <div class="prose max-w-none">${content}</div>
             `;
             
             if (tags.length > 0) {
                 previewHtml += `
-                    <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-700">
-                        ${tags.map(tag => `<span class="text-sm bg-slate-700 text-slate-300 px-3 py-1 rounded-full">${tag}</span>`).join('')}
+                    <div class="flex flex-wrap gap-2 mt-6 pt-6 border-t border-slate-200">
+                        ${tags.map(tag => `<span class="text-sm bg-teal-100 text-teal-700 px-3 py-1 rounded-full">${tag}</span>`).join('')}
                     </div>
                 `;
             }
@@ -407,8 +908,8 @@
         function showNotification(message, type) {
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 fade-in ${
-                type === 'success' ? 'bg-green-900 text-green-200 border border-green-700' : 
-                'bg-red-900 text-red-200 border border-red-700'
+                type === 'success' ? 'bg-teal-100 text-teal-800 border border-teal-200' : 
+                'bg-red-100 text-red-800 border border-red-200'
             }`;
             notification.innerHTML = `
                 <div class="flex items-center">
